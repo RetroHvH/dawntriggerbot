@@ -1,0 +1,79 @@
+void
+MouFilter_ServiceCallback(
+    IN PDEVICE_OBJECT DeviceObject,
+    IN PMOUSE_INPUT_DATA InputDataStart,
+    IN PMOUSE_INPUT_DATA InputDataEnd,
+    IN OUT PULONG InputDataConsumed
+    )
+{
+    PDEVICE_EXTENSION devExt;
+    WDFDEVICE hDevice;
+
+    hDevice = WdfWdmDeviceGetWdfDeviceHandle(DeviceObject);
+
+    devExt = FilterGetData(hDevice);
+
+    // Determine the number of original input packets.
+
+    ULONG originalPacketCount = InputDataEnd - InputDataStart;
+
+    // Calculate the size of the new input packet you want to insert.
+
+    ULONG newPacketSize = sizeof(MOUSE_INPUT_DATA);
+
+    // Allocate memory for the new input packet.
+
+    PMOUSE_INPUT_DATA newPacket = ExAllocatePoolWithTag(
+        NonPagedPool,
+        newPacketSize,
+        'MyFt'
+    );
+
+    if (newPacket != NULL) {
+
+        // Fill in the new packet with your custom data.
+
+        newPacket->UnitId = InputDataStart->UnitId;
+        newPacket->Flags = InputDataStart->Flags;
+        newPacket->ButtonFlags = MOUSE_LEFT_BUTTON_DOWN; // Modify this as needed
+        newPacket->ButtonData = 0;
+        newPacket->RawButtons = 0;
+        newPacket->LastX = 0;
+        newPacket->LastY = 0;
+        newPacket->ExtraInformation = 0;
+
+
+        // Insert your custom packet into the stream before the original packets.
+
+        RtlMoveMemory(
+            InputDataStart + 1, // Shift the original packets forward by one
+            InputDataStart,
+            originalPacketCount * sizeof(MOUSE_INPUT_DATA)
+        );
+
+        RtlCopyMemory(
+            InputDataStart, // Overwrite the first packet with your custom packet
+            newPacket,
+            newPacketSize
+        );
+
+
+        // Increment the count of consumed input packets.
+
+        (*InputDataConsumed)++;
+
+        // Free the memory allocated for the new packet.
+
+        ExFreePoolWithTag(newPacket, 'MyFt');
+    }
+
+
+    // Call the original service callback to pass the modified input packets.
+
+    (*(PSERVICE_CALLBACK_ROUTINE)devExt->UpperConnectData.ClassService)(
+        devExt->UpperConnectData.ClassDeviceObject,
+        InputDataStart,
+        InputDataEnd + 1, // Include the newly inserted packet
+        InputDataConsumed
+    );
+}
