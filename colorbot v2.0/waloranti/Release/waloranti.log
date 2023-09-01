@@ -1,0 +1,10 @@
+﻿  main.cpp
+C:\Users\Boden\Documents\colorbot1\waloranti\main.cpp(54,9): warning C4189: 'shoot_delay_in_ms': local variable is initialized but not referenced
+C:\Users\Boden\Documents\colorbot1\waloranti\main.cpp(58,9): warning C4189: 'smooth': local variable is initialized but not referenced
+C:\Users\Boden\Documents\colorbot1\waloranti\main.cpp(57,9): warning C4189: 'fov': local variable is initialized but not referenced
+  Generating code
+  1 of 871 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  waloranti.vcxproj -> C:\Users\Boden\Documents\colorbot1\Release\waloranti.exe

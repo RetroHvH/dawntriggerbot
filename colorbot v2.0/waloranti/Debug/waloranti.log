@@ -1,0 +1,11 @@
+﻿  capturescreen.cpp
+C:\Users\boden\OneDrive\Documents\colorbot 2.0\colorbot-2.0\colorbot v2.0\waloranti\capturescreen.cpp(10,10): fatal  error C1083: Cannot open include file: 'atlbase.h': No such file or directory
+  enemy_scanner.cpp
+C:\Users\boden\OneDrive\Documents\colorbot 2.0\colorbot-2.0\colorbot v2.0\waloranti\capturescreen.hpp(6,10): fatal  error C1083: Cannot open include file: 'atlbase.h': No such file or directory
+  keyAuth.cpp
+  main.cpp
+C:\Users\boden\OneDrive\Documents\colorbot 2.0\colorbot-2.0\colorbot v2.0\waloranti\capturescreen.hpp(6,10): fatal  error C1083: Cannot open include file: 'atlbase.h': No such file or directory
+  gui.cpp
+  utilities.cpp
+C:\Users\boden\OneDrive\Documents\colorbot 2.0\colorbot-2.0\colorbot v2.0\waloranti\utilities\utilities.cpp(40,79): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
