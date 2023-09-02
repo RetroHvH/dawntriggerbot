@@ -8,7 +8,6 @@
 #include <string>
 
 
-
 int auth();
 
 #endif

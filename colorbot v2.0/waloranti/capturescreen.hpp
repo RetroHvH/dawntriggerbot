@@ -12,17 +12,19 @@
 
 #pragma comment(lib, "D3D11.lib")
 
-#define Report(x) { printf("Report: %s(%d), hr=0x%08x\n", __FILE__, __LINE__, (x)); }
+#define Report(x)
 #define min(a,b)            (((a) < (b)) ? (a) : (b))
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
 
-struct Dev {
+struct Dev
+{
     CComPtr<ID3D11Device> device;
     CComPtr<ID3D11DeviceContext> deviceContext;
     D3D_FEATURE_LEVEL featureLevel;
-    
 
-    Dev() {
+
+    Dev()
+    {
         static const D3D_DRIVER_TYPE driverTypes[] = {
             D3D_DRIVER_TYPE_HARDWARE,
             D3D_DRIVER_TYPE_WARP,
@@ -36,7 +38,8 @@ struct Dev {
             D3D_FEATURE_LEVEL_9_1
         };
 
-        for (const auto& driverType : driverTypes) {
+        for (const auto& driverType : driverTypes)
+        {
             const auto hr = D3D11CreateDevice(
                 nullptr,
                 driverType,
@@ -49,7 +52,8 @@ struct Dev {
                 &featureLevel,
                 &deviceContext
             );
-            if (SUCCEEDED(hr)) {
+            if (SUCCEEDED(hr))
+            {
                 break;
             }
             device.Release();
@@ -58,10 +62,12 @@ struct Dev {
     }
 };
 
-struct OutputDuplication {
+struct OutputDuplication
+{
     CComPtr<IDXGIOutputDuplication> outputDuplication;
 
-    OutputDuplication(ID3D11Device* device) {
+    OutputDuplication(ID3D11Device* device)
+    {
         HRESULT hr;
 
         CComPtr<IDXGIDevice> dxgiDevice;
@@ -69,42 +75,66 @@ struct OutputDuplication {
             __uuidof(dxgiDevice),
             reinterpret_cast<void**>(&dxgiDevice)
         );
-        if (FAILED(hr)) { Report(hr); return; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
 
         CComPtr<IDXGIAdapter> dxgiAdapter;
         hr = dxgiDevice->GetParent(
             __uuidof(dxgiAdapter),
             reinterpret_cast<void**>(&dxgiAdapter)
         );
-        if (FAILED(hr)) { Report(hr); return; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
 
         CComPtr<IDXGIOutput> dxgiOutput;
         hr = dxgiAdapter->EnumOutputs(0, &dxgiOutput);
-        if (FAILED(hr)) { Report(hr); return; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
 
         CComPtr<IDXGIOutput1> dxgiOutput1;
         hr = dxgiOutput->QueryInterface(
             __uuidof(IDXGIOutput1),
             reinterpret_cast<void**>(&dxgiOutput1)
         );
-        if (FAILED(hr)) { Report(hr); return; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
 
         hr = dxgiOutput1->DuplicateOutput(device, &outputDuplication);
-        if (FAILED(hr)) { Report(hr); return; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
     }
 };
 
-struct AcquiredDesktopImage {
+struct AcquiredDesktopImage
+{
     CComPtr<ID3D11Texture2D> acquiredDesktopImage;
 
-    AcquiredDesktopImage(IDXGIOutputDuplication* outputDuplication) {
+    AcquiredDesktopImage(IDXGIOutputDuplication* outputDuplication)
+    {
         CComPtr<IDXGIResource> desktopResource;
         HRESULT hr = E_FAIL;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; ++i)
+        {
             DXGI_OUTDUPL_FRAME_INFO fi{};
             const int timeoutMsec = 500; // milliseconds
             hr = outputDuplication->AcquireNextFrame(timeoutMsec, &fi, &desktopResource);
-            if (SUCCEEDED(hr) && (fi.LastPresentTime.QuadPart == 0)) {
+            if (SUCCEEDED(hr) && (fi.LastPresentTime.QuadPart == 0))
+            {
                 // If AcquireNextFrame() returns S_OK and
                 // fi.LastPresentTime.QuadPart == 0, it means
                 // AcquireNextFrame() didn't acquire next frame yet.
@@ -118,31 +148,44 @@ struct AcquiredDesktopImage {
                 Sleep(1);
                 continue;
             }
-            else {
+            else
+            {
                 break;
             }
         }
-        if (FAILED(hr)) { Report(hr); return; }
-        try {
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
+        try
+        {
             hr = desktopResource->QueryInterface(
                 __uuidof(ID3D11Texture2D),
                 reinterpret_cast<void**>(&acquiredDesktopImage)
             );
         }
-        catch (...) {
-
+        catch (...)
+        {
         }
-        if (FAILED(hr)) { Report(hr); return; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return;
+        }
     }
 };
 
-struct Image {
+struct Image
+{
     std::vector<byte> bytes;
     int width = 0;
     int height = 0;
     int rowPitch = 0;
 };
-struct RGB {
+
+struct RGB
+{
     uint8_t r;
     uint8_t g;
     uint8_t b;
@@ -153,10 +196,7 @@ std::vector<RGB> getPixelsAboveCenter(const Image& image, int);
 std::vector<RGB> getPixelsBelowCenter(const Image& image, int);
 
 
-
-
 Image captureDesktop();
-
 
 
 #endif // SCREEN_CAPTURE_HPP

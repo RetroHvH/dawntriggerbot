@@ -6,10 +6,11 @@
 #include "gui.hpp"
 #include <string>
 #include <map>
-class Gui {
 
+class Gui
+{
 public:
-	static std::map<std::string, int> config();
-	int keybind();
+    static std::map<std::string, int> config();
+    int keybind();
 };
 #endif

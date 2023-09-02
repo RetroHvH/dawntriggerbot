@@ -10,9 +10,9 @@
 
 #include <vector>
 #include <windows.h>
-#include <iostream>       
-#include <thread>         
-#include <chrono>  
+#include <iostream>
+#include <thread>
+#include <chrono>
 #include <array>
 #include <math.h>
 
@@ -22,17 +22,14 @@ using namespace std;
 
 Gui gui_instance2;
 std::map<std::string, int> configMap2 = gui_instance2.config();
-DWORD dx;
-DWORD dy;
 
 
 enemy_scanner scanner;
 
 
-
-
-void click_mouse() {
-    INPUT input = { 0 };
+void click_mouse()
+{
+    INPUT input = {0};
     // Set up a generic mouse event
     input.type = INPUT_MOUSE;
     input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
@@ -44,60 +41,52 @@ void click_mouse() {
     SendInput(1, &input, sizeof(INPUT));
 }
 
-void printCursorPosition() {
+void printCursorPosition()
+{
     POINT cursorPos;
-    if (GetCursorPos(&cursorPos)) {
+    if (GetCursorPos(&cursorPos))
+    {
         std::cout << "Cursor Position - X: " << cursorPos.x << ", Y: " << cursorPos.y << std::endl;
-    } else {
+    }
+    else
+    {
         std::cerr << "Failed to get cursor position." << std::endl;
     }
 }
 
 
-
-int main() {
+int main()
+{
     int shoot_delay_in_ms = configMap2["shoot_delay_in_ms"];
     int shoot_key = configMap2["shoot_key"];
     int shot_delay = configMap2["delay_in_between_shoots_inMS"];
     int fov = configMap2["magnet_fov"];
     int smooth = configMap2["magnet_smooth"];
-    const std::vector<int> fail = { 6969,4200 };
-    int newMouseSpeed = 10;
-    int MouseSpeed = 1;
-    SystemParametersInfoA(SPI_SETMOUSESPEED, 0, &MouseSpeed, 0);
-    
+    const std::vector<int> fail = {6969, 4200};
+
     //auth();
 
     scanner.initColor();
 
-    while (true) {
-        if (utilities::is_pressed(shoot_key)) {
+    while (true)
+    {
+        if (utilities::is_pressed(shoot_key))
+        {
             Image currentScreen = captureDesktop();
             std::vector<int> Target = scanner.find_enemy_outline(currentScreen);
-            if (Target != fail && Target[0] < 1440 && Target[1] < 2560 && Target[0] > 0 && Target[1] > 0) {
-                INPUT input;
-                input.type = INPUT_MOUSE;
-                input.mi.dx = Target[0] * (65536 /currentScreen.width);
-                input.mi.dy = Target[1]* (65536 /currentScreen.height);
-                input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
-
-                // Send the input to the system
-                SystemParametersInfoA(SPI_SETMOUSESPEED, 0, reinterpret_cast<void*>(newMouseSpeed), SPIF_SENDCHANGE);
-                SendInput(1, &input, sizeof(INPUT));
-                SystemParametersInfoA(SPI_SETMOUSESPEED, 0, reinterpret_cast<void*>(MouseSpeed), SPIF_SENDCHANGE);
+            if (Target != fail && Target[0] < 1440 && Target[1] < 2560 && Target[0] > 0 && Target[1] > 0)
+            {
+               
                 printCursorPosition();
                 
             }
-            
-            if (scanner.is_crosshair_on_enemy(currentScreen)) {
+
+            if (scanner.is_crosshair_on_enemy(currentScreen))
+            {
                 click_mouse();
                 Sleep(shot_delay);
             }
-
-
-
         }
-
     }
     return 0;
 }

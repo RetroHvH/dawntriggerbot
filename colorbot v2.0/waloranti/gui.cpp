@@ -13,7 +13,8 @@ using namespace std;
 
 #include <map> // Include the map library
 
-std::map<std::string, int> Gui::config() {
+std::map<std::string, int> Gui::config()
+{
     // std::ifstream is RAII, i.e. no need to call close
     std::ifstream cFile("config.cfg");
     if (cFile.is_open())
@@ -24,7 +25,7 @@ std::map<std::string, int> Gui::config() {
         while (getline(cFile, line))
         {
             line.erase(std::remove_if(line.begin(), line.end(), isspace),
-                line.end());
+                       line.end());
             if (line.empty() || line[0] == '#')
             {
                 continue;
@@ -44,7 +45,6 @@ std::map<std::string, int> Gui::config() {
         // Now you can access the values by their names (keys) with the 'configMap' map.
 
         return configMap;
-        
     }
     else
     {
@@ -54,8 +54,8 @@ std::map<std::string, int> Gui::config() {
 }
 
 
-
-int Gui::keybind() {
+int Gui::keybind()
+{
     std::ifstream configFile("config.cfg");
     std::string line1, line2, line3, line4, line5, line6;
 
@@ -76,18 +76,23 @@ int Gui::keybind() {
     int virtualKeyCode = 0;
     bool isMouseButton = false;
     Sleep(2000);
-    while (true) {
+    while (true)
+    {
         // Check for keyboard key press (non-zero return value)
-        for (int key = 1; key <= 255; ++key) {
-            if (GetAsyncKeyState(key) & 0x8000) {
+        for (int key = 1; key <= 255; ++key)
+        {
+            if (GetAsyncKeyState(key) & 0x8000)
+            {
                 virtualKeyCode = key;
                 break;
             }
         }
 
         // Check for mouse button press (non-zero return value)
-        for (int button = 1; button <= 5; ++button) {
-            if (GetAsyncKeyState(0x01 << (button - 1)) & 0x8000) {
+        for (int button = 1; button <= 5; ++button)
+        {
+            if (GetAsyncKeyState(0x01 << (button - 1)) & 0x8000)
+            {
                 virtualKeyCode = button;
                 isMouseButton = true;
                 break;
@@ -122,13 +127,3 @@ int Gui::keybind() {
     std::cout << "Config file updated with the pressed key/mouse button code.\n";
     return 0;
 }
-
-
-
-
-
-
-
-
-
-

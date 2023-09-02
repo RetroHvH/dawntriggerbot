@@ -26,15 +26,11 @@ ID3D11DeviceContext* deviceContext = dev.deviceContext;
 DXGI_OUTDUPL_DESC duplDesc;
 
 
+#define Report(x)
 
-
-
-#define Report(x) { printf("Report: %s(%d), hr=0x%08x\n", __FILE__, __LINE__, (x)); }
-
-
-
-std::vector<RGB> getPixelsAboveCenter(const Image& image, int xoffset) {
-
+//gets pixels in a straight line up from a specified offset (offset is set in config file both functions start at the same y coord)
+std::vector<RGB> getPixelsAboveCenter(const Image& image, int xoffset)
+{
     std::vector<RGB> pixelsStraightUp;
     pixelsStraightUp.clear();
 
@@ -43,14 +39,15 @@ std::vector<RGB> getPixelsAboveCenter(const Image& image, int xoffset) {
     centerX = round(centerX) + xoffset;
     centerY = round(centerY);
 
-    int startY = 0; 
-    int endY = centerY; 
+    int startY = 0;
+    int endY = centerY;
 
-   
+
     startY = max(0, startY);
     endY = min(endY, image.height - 1);
 
-    for (int y = startY; y <= endY; y++) {
+    for (int y = startY; y <= endY; y++)
+    {
         int rowOffset = y * image.rowPitch;
         int offset = rowOffset + (centerX * 4);
 
@@ -58,17 +55,14 @@ std::vector<RGB> getPixelsAboveCenter(const Image& image, int xoffset) {
         uint8_t green = image.bytes[offset + 1];
         uint8_t red = image.bytes[offset + 2];
 
-        pixelsStraightUp.push_back(RGB{ red, green, blue });
+        pixelsStraightUp.push_back(RGB{red, green, blue});
     }
-    
+
     return pixelsStraightUp;
-
-    
-    
 }
-
-std::vector<RGB> getPixelsBelowCenter(const Image& image, int xoffset) {
-    
+//gets pixels in a straight line down from a specified offset (offset is set in config file both functions start at the same y coord)
+std::vector<RGB> getPixelsBelowCenter(const Image& image, int xoffset)
+{
     std::vector<RGB> pixelsStraightdown;
     pixelsStraightdown.clear();
     double centerX = image.width / 2;
@@ -76,13 +70,12 @@ std::vector<RGB> getPixelsBelowCenter(const Image& image, int xoffset) {
     centerX = round(centerX) + xoffset;
     centerY = round(centerY);
 
-    int startY = image.height - 1; 
-    int endY = centerY; 
-
-   
+    int startY = image.height - 1;
+    int endY = centerY;
 
 
-    for (int y = startY; y >= endY; y--) {
+    for (int y = startY; y >= endY; y--)
+    {
         int rowOffset = y * image.rowPitch;
         int offset = rowOffset + (centerX * 4);
 
@@ -90,33 +83,41 @@ std::vector<RGB> getPixelsBelowCenter(const Image& image, int xoffset) {
         uint8_t green = image.bytes[offset + 1];
         uint8_t red = image.bytes[offset + 2];
 
-        pixelsStraightdown.push_back(RGB{ red, green, blue });
-
+        pixelsStraightdown.push_back(RGB{red, green, blue});
     }
     int size = pixelsStraightdown.size();
-    
+
     return pixelsStraightdown;
- 
-    
 }
 
 
-
-Image captureDesktop() {
-
-    if (device == nullptr) { Report(E_FAIL); return {}; }
+Image captureDesktop()
+{
+    if (device == nullptr)
+    {
+        Report(E_FAIL);
+        return {};
+    }
 
     // Create tex2dStaging which represents duplication image of desktop.
     CComPtr<ID3D11Texture2D> tex2dStaging;
     {
         OutputDuplication od(device);
         IDXGIOutputDuplication* outputDuplication = od.outputDuplication;
-        if (outputDuplication == nullptr) { Report(E_FAIL); return {}; }
+        if (outputDuplication == nullptr)
+        {
+            Report(E_FAIL);
+            return {};
+        }
 
         AcquiredDesktopImage adi(outputDuplication);
         ID3D11Texture2D* acquiredDesktopImage = adi.acquiredDesktopImage;
 
-        if (acquiredDesktopImage == nullptr) { Report(E_FAIL); return {}; }
+        if (acquiredDesktopImage == nullptr)
+        {
+            Report(E_FAIL);
+            return {};
+        }
 
         outputDuplication->GetDesc(&duplDesc);
 
@@ -127,7 +128,11 @@ Image captureDesktop() {
             || f == DXGI_FORMAT_B8G8R8A8_UNORM_SRGB
             || f == DXGI_FORMAT_B8G8R8X8_TYPELESS
             || f == DXGI_FORMAT_B8G8R8X8_UNORM_SRGB;
-        if (!goodFormat) { Report(E_FAIL); return {}; }
+        if (!goodFormat)
+        {
+            Report(E_FAIL);
+            return {};
+        }
 
         D3D11_TEXTURE2D_DESC desc{};
         desc.Width = duplDesc.ModeDesc.Width;
@@ -142,8 +147,16 @@ Image captureDesktop() {
         desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
         desc.Usage = D3D11_USAGE_STAGING;
         const auto hr = device->CreateTexture2D(&desc, nullptr, &tex2dStaging);
-        if (FAILED(hr)) { Report(hr); return {}; }
-        if (tex2dStaging == nullptr) { Report(E_FAIL); return {}; }
+        if (FAILED(hr))
+        {
+            Report(hr);
+            return {};
+        }
+        if (tex2dStaging == nullptr)
+        {
+            Report(E_FAIL);
+            return {};
+        }
 
         deviceContext->CopyResource(tex2dStaging, acquiredDesktopImage);
     }
@@ -162,7 +175,11 @@ Image captureDesktop() {
         0,
         &res
     );
-    if (FAILED(hr)) { Report(hr); return {}; }
+    if (FAILED(hr))
+    {
+        Report(hr);
+        return {};
+    }
     image.width = static_cast<int>(desc.Width);
     image.height = static_cast<int>(desc.Height);
     image.rowPitch = res.RowPitch;
@@ -171,6 +188,3 @@ Image captureDesktop() {
     deviceContext->Unmap(tex2dStaging, 0);
     return image;
 }
-
-
-

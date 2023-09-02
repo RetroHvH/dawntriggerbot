@@ -1,10 +1,59 @@
-﻿  main.cpp
-C:\Users\Boden\Documents\colorbot1\waloranti\main.cpp(54,9): warning C4189: 'shoot_delay_in_ms': local variable is initialized but not referenced
-C:\Users\Boden\Documents\colorbot1\waloranti\main.cpp(58,9): warning C4189: 'smooth': local variable is initialized but not referenced
-C:\Users\Boden\Documents\colorbot1\waloranti\main.cpp(57,9): warning C4189: 'fov': local variable is initialized but not referenced
+﻿  enemy_scanner.cpp
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(149,21): warning C4244: 'initializing': conversion from '_Rep' to 'int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(174,18): warning C4456: declaration of 'x' hides previous local declaration
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(167,9): message : see declaration of 'x'
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(170,10): warning C4189: 'alreadySet': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(169,9): warning C4189: 'count2': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(167,9): warning C4189: 'x': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(168,9): warning C4189: 'pixel_count': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(231,18): warning C4456: declaration of 'x' hides previous local declaration
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(223,9): message : see declaration of 'x'
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(226,10): warning C4189: 'alreadySet': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(225,9): warning C4189: 'count2': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(223,9): warning C4189: 'x': local variable is initialized but not referenced
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(224,9): warning C4189: 'pixel_count': local variable is initialized but not referenced
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(394,12): warning C4459: declaration of 'i' hides global declaration
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(16,5): message : see declaration of 'i'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(390,7): message : while compiling class template member function 'void ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>::RemoveAll(void)'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\statreg.h(158,12): message : see the first reference to 'ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>::RemoveAll' in 'ATL::CExpansionVector::ClearReplacements'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\statreg.h(99,9): message : see reference to class template instantiation 'ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlbase.h(5325,12): warning C4459: declaration of 'i' hides global declaration
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(16,5): message : see declaration of 'i'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlbase.h(5318,11): message : while compiling class template member function 'ATL::CAtlAutoThreadModuleT<ATL::CAtlAutoThreadModule,ATL::CComSimpleThreadAllocator,4294967295>::~CAtlAutoThreadModuleT(void)'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlbase.h(5407,9): message : see reference to class template instantiation 'ATL::CAtlAutoThreadModuleT<ATL::CAtlAutoThreadModule,ATL::CComSimpleThreadAllocator,4294967295>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(218,12): warning C4459: declaration of 'i' hides global declaration
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(16,5): message : see declaration of 'i'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(214,7): message : while compiling class template member function 'void ATL::CSimpleArray<ATOM,ATL::CSimpleArrayEqualHelper<T>>::RemoveAll(void)'
+          with
+          [
+              T=ATOM
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlbase.h(7665,44): message : see the first reference to 'ATL::CSimpleArray<ATOM,ATL::CSimpleArrayEqualHelper<T>>::RemoveAll' in 'ATL::AtlWinModuleTerm'
+          with
+          [
+              T=ATOM
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlbase.h(505,21): message : see reference to class template instantiation 'ATL::CSimpleArray<ATOM,ATL::CSimpleArrayEqualHelper<T>>' being compiled
+          with
+          [
+              T=ATOM
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(456,11): warning C4459: declaration of 'i' hides global declaration
+C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\waloranti\enemy_scanner\enemy_scanner.cpp(16,5): message : see declaration of 'i'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(454,6): message : while compiling class template member function 'int ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>::FindKey(const TKey &) const'
+          with
+          [
+              TKey=LPTSTR
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\atlsimpcoll.h(425,14): message : see the first reference to 'ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>::FindKey' in 'ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>::Lookup'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\statreg.h(649,17): message : see the first reference to 'ATL::CSimpleMap<LPTSTR,LPOLESTR,ATL::CExpansionVectorEqualHelper>::Lookup' in 'ATL::CRegObject::StrFromMap'
   Generating code
-  1 of 871 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  11 of 944 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  waloranti.vcxproj -> C:\Users\Boden\Documents\colorbot1\Release\waloranti.exe
+  waloranti.vcxproj -> C:\Users\Boden\Documents\GitHub\colorbot-2.0\colorbot v2.0\Release\waloranti.exe
