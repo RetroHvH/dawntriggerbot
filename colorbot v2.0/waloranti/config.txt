@@ -1,2 +1,0 @@
-shoot_delay_in_ms=0
-x=13

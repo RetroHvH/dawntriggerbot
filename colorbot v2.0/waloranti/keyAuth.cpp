@@ -60,13 +60,15 @@ int auth()
     {
         while (done == false)
         {
+            system("CLS");
             std::cout << skCrypt(
-                    "\n\n [1] Login\n [2] Register\n [3] Upgrade\n [4] License key only\n [5] KeyBind \n Choose option: ");
+                    "\n\n [1] Login\n [2] Register\n [3] Change Triggerbot Keybind\n Choose option : "); //[3] Upgrade\n [4] License key only\n [5] KeyBind \n Choose option: ");
             int option;
             std::string username;
             std::string password;
             std::string key;
             std::cin >> option;
+            system("CLS");
 
             switch (option)
             {
@@ -89,17 +91,15 @@ int auth()
                 KeyAuthApp.regstr(username, password, key);
                 done = true;
 
-                break;
-            case 3:
-                std::cout << skCrypt("\n\n Enter username: ");
-                std::cin >> username;
-                std::cout << skCrypt("\n Enter license: ");
-                std::cin >> key;
-                KeyAuthApp.upgrade(username, key);
-                done = true;
 
                 break;
-            case 4:
+            case 3:
+                temp = gui_instance1.keybind();
+                Sleep(3000);
+                system("cls");
+
+                break;
+            /*case 4:
                 std::cout << skCrypt("\n Enter license: ");
                 std::cin >> key;
                 KeyAuthApp.license(key);
@@ -108,10 +108,14 @@ int auth()
                 break;
             case 5:
 
-                temp = gui_instance1.keybind();
-                Sleep(3000);
-                system("cls");
-                break;
+
+                std::cout << skCrypt("\n\n Enter username: ");
+                std::cin >> username;
+                std::cout << skCrypt("\n Enter license: ");
+                std::cin >> key;
+                KeyAuthApp.upgrade(username, key);
+                done = true;
+                break;*/
 
             default:
                 std::cout << skCrypt("\n\n Status: Failure: Invalid Selection");
@@ -130,20 +134,21 @@ int auth()
             exit(0);
         }
     }
-    std::cout << skCrypt("\n Welcome to Dawn Private");
+    std::cout << skCrypt("\n Welcome to Dawn Private, ") << KeyAuthApp.data.username;
     std::cout << skCrypt("\n");
-    std::cout << skCrypt("\n Username: ") << KeyAuthApp.data.username;
+    std::cout << skCrypt(" Triggerbot is Active");
+    /*std::cout << skCrypt("\n Username: ") << KeyAuthApp.data.username;
     std::cout << skCrypt("\n Create date: ") << tm_to_readable_time(
         timet_to_tm(string_to_timet(KeyAuthApp.data.createdate)));
-    std::cout << skCrypt("\n Last login: ") << tm_to_readable_time(
+    std::cout << skCrypt("\n\n\n\n Last login: ") << tm_to_readable_time(
         timet_to_tm(string_to_timet(KeyAuthApp.data.lastlogin)));
-    std::cout << skCrypt("\n Subscription(s): ");
+    std::cout << skCrypt("\n Subscription(s): ");*/
 
     for (int i = 0; i < KeyAuthApp.data.subscriptions.size(); i++)
     {
         auto sub = KeyAuthApp.data.subscriptions.at(i);
-        std::cout << skCrypt("\n name: ") << sub.name;
-        std::cout << skCrypt(" : expiry: ") << tm_to_readable_time(timet_to_tm(string_to_timet(sub.expiry)));
+        //std::cout << skCrypt("\n name: ") << sub.name;
+        std::cout << skCrypt("\n\n\n\n\nExpiry: ") << tm_to_readable_time(timet_to_tm(string_to_timet(sub.expiry)));
     }
     return (0);
 }
@@ -152,7 +157,7 @@ std::string tm_to_readable_time(tm ctx)
 {
     char buffer[80];
 
-    strftime(buffer, sizeof(buffer), "%a %m/%d/%y %H:%M:%S %Z", &ctx);
+    strftime(buffer, sizeof(buffer), "%a %m/%d/%y %H:%M:%S", &ctx); // %Z
 
     return std::string(buffer);
 }

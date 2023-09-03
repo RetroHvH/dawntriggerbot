@@ -6,7 +6,6 @@
 #include "capturescreen.hpp"
 #include "keyAuth.hpp"
 #include "utilities/skcrypt.hpp"
-#include "DD.h"
 
 #include <vector>
 #include <windows.h>
@@ -22,7 +21,6 @@ using namespace std;
 
 Gui gui_instance2;
 std::map<std::string, int> configMap2 = gui_instance2.config();
-
 
 enemy_scanner scanner;
 
@@ -55,16 +53,27 @@ void printCursorPosition()
 }
 
 
+bool CheckDebuggerPresent()
+{
+    return IsDebuggerPresent() != 0;
+}
+
 int main()
 {
+    if (IsDebuggerPresent())
+    {
+        // Debugger is Detected; Take Action Here
+        exit(1);
+    }
+
     int shoot_delay_in_ms = configMap2["shoot_delay_in_ms"];
     int shoot_key = configMap2["shoot_key"];
     int shot_delay = configMap2["delay_in_between_shoots_inMS"];
-    int fov = configMap2["magnet_fov"];
-    int smooth = configMap2["magnet_smooth"];
+    //int fov = configMap2["magnet_fov"];
+    //int smooth = configMap2["magnet_smooth"];
     const std::vector<int> fail = {6969, 4200};
 
-    //auth();
+    auth();
 
     scanner.initColor();
 

@@ -72,7 +72,7 @@ int Gui::keybind()
     configFile.close();
 
     // Get the virtual key code from the user
-    std::cout << "Press any key or mouse button: ";
+    std::cout << " Press any key or mouse button: ";
     int virtualKeyCode = 0;
     bool isMouseButton = false;
     Sleep(2000);
@@ -124,6 +124,6 @@ int Gui::keybind()
     // Close the file
     outFile.close();
 
-    std::cout << "Config file updated with the pressed key/mouse button code.\n";
+    std::cout << "\n Config file updated with the pressed key/mouse button code.\n";
     return 0;
 }
