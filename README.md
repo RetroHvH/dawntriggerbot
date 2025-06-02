@@ -1,8 +1,1 @@
-# dawntriggerbot
-DawnHook
-
-TO DO LIST:
-FIX TRIGGERBOT TAB ( ADD BUTTONS ETC )
-WORK FOR ANY SENSITIVITY
-IMPROVE GUI
-CONNECT TO BACKEND
+This project was pasted from a different source here on GitHub. I helped the dev optimize some code and fix bugs.
